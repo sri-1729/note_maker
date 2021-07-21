@@ -2,6 +2,7 @@ from flask import Flask, g
 from data.config import *
 from responses.resp import *
 import api.topic_get
+import api.topic_add
 app = Flask("notes_api")
 
 @app.before_request
@@ -17,9 +18,9 @@ def create_topics(user):
     conn.commit()
     return success_message(f"created {user} table successfully")
 
-@app.route('/topics/add')
+@app.route('/topics/add', methods=['POST'])
 def add_topic():
-    return api.addTopic()
+    return api.topic_add.topic_add()
 
 @app.route('/<user>/topics/get')
 def fetch_topic(user):
