@@ -16,6 +16,7 @@ def topic_add():
         cur = g.db.cursor()
         try:
             cur.execute(f"insert into {user}_topic(topic) values('{topic}')")
+            cur.execute(f"create table {user}_{topic} (id serial primary key, stopic text, description text, resource text);")
             cur.close()
             g.db.commit()
         except:
